@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "camera_raindrops",
+  "id": "prettysky",
   "version": "${version}",
 
-  "name": "Camera Raindrops",
+  "name": "Prettier Sky",
   "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
     "Superkat32"
@@ -14,19 +14,19 @@
   },
 
   "license": "MIT License",
-  "icon": "assets/camera_raindrops/icon.png",
+  "icon": "assets/prettysky/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.superkat.camera_raindrops.CameraRaindrops"
+      "net.superkat.prettysky.PrettySky"
     ],
     "client": [
-      "net.superkat.camera_raindrops.CameraRaindropsClient"
+      "net.superkat.prettysky.PrettySkyClient"
     ]
   },
   "mixins": [
-    "camera_raindrops.mixins.json"
+    "prettysky.mixins.json"
   ],
 
   "depends": {
