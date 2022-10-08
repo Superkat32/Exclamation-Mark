@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "camera_raindrops",
+  "version": "${version}",
+
+  "name": "Camera Raindrops",
+  "description": "This is an example description! Tell everyone what your mod is about!",
+  "authors": [
+    "Superkat32"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "MIT License",
+  "icon": "assets/camera_raindrops/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.superkat.camera_raindrops.CameraRaindrops"
+    ],
+    "client": [
+      "net.superkat.camera_raindrops.CameraRaindropsClient"
+    ]
+  },
+  "mixins": [
+    "camera_raindrops.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.9",
+    "fabric-api": "*",
+    "minecraft": "~1.19",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
