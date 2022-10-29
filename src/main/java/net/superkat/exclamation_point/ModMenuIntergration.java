@@ -1,4 +1,4 @@
-//package net.superkat.prettysky;
+//package net.superkat.exclamation_point;
 //
 //import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 //import com.terraformersmc.modmenu.api.ModMenuApi;

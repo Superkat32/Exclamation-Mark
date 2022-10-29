@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "prettysky",
+  "id": "exclamation_point",
   "version": "${version}",
 
-  "name": "Prettier Sky",
+  "name": "Exclamation Point",
   "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
     "Superkat32"
@@ -14,19 +14,19 @@
   },
 
   "license": "MIT License",
-  "icon": "assets/prettysky/icon.png",
+  "icon": "assets/exclamation_point/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.superkat.prettysky.PrettySky"
+      "net.superkat.exclamation_point.ExclamationPoint"
     ],
     "client": [
-      "net.superkat.prettysky.PrettySkyClient"
+      "net.superkat.exclamation_point.ExclamationPointClient"
     ]
   },
   "mixins": [
-    "prettysky.mixins.json"
+    "exclamation_point.mixins.json"
   ],
 
   "depends": {
