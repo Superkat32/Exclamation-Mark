@@ -21,4 +21,7 @@ public class ExclamationPointClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(ExclamationPoint.MARK, Factory::new);
 
     }
+    public static Identifier id(String path) {
+        return new Identifier(MOD_ID, path);
+    }
 }
