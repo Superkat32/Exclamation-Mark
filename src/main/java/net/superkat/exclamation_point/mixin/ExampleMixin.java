@@ -29,12 +29,14 @@ public abstract class ExampleMixin {
 	@Inject(method = "start()V", at = @At("HEAD"))
 
 	public void start(CallbackInfo ci) {
+		//Logs the monster's info that I might need later
 		ExclamationPoint.LOGGER.info(String.valueOf(this.mob.speed));
 		ExclamationPoint.LOGGER.info(String.valueOf(this.mob.world));
 		ExclamationPoint.LOGGER.info(String.valueOf(this.mob.getType()));
 		ExclamationPoint.LOGGER.info(String.valueOf(this.mob));
 //		if(this.canStart()) {
 		ExclamationPoint.LOGGER.info("SHOULD CONTINUE HAS BEEN ACTIVATED!");
+		//Calls the method "doParticle", which will help the game display the particle.
 		this.doParticle(this.mob.world);
 //		}
 	}
@@ -43,8 +45,15 @@ public abstract class ExampleMixin {
 		ExclamationPoint.LOGGER.info("doParticle has been activated!");
         if (world instanceof ServerWorld) {
 			ExclamationPoint.LOGGER.info("Particle has been activated!");
-			((ServerWorld) world).spawnParticles(ParticleTypes.DAMAGE_INDICATOR, mob.getX(), mob.getY(), mob.getZ(), 1, 0.1, 0, 0.1, 0.2);
-            world.addParticle(ParticleTypes.SWEEP_ATTACK, this.mob.getX(), this.mob.getY(), this.mob.getZ(), 0.1, 0, 0.2);
+//			((ServerWorld) world).spawnParticles(ParticleEffect particle, double x, double y, double z, int count, double deltaX, double deltaY, double deltaZ, double speed)
+			//ParticleEffect - The type of particle you wish to display
+			//double x, double y, double z - The position that the particle will be displayed
+			//int count - The amount of particles you want to display
+			//double deltaX, double deltaY, double deltaZ - The random movement of the particle.
+			//Changing deltaX will make the particle sometimes random move in the X direction the amount of the number inputted. Same for Y and Z.
+			//double speed - The speed that the particle will travel at. I believe it can be affected by deltaX, deltaY, and deltaZ
+			((ServerWorld) world).spawnParticles(ParticleTypes.END_ROD, mob.getX(), mob.getBodyY(0.5), mob.getZ(), 1, 0.1, 0, 0.1, 0.2);
+//            world.addParticle(ParticleTypes.ELECTRIC_SPARK, this.mob.getX(), this.mob.getY(), this.mob.getZ(), 0.1, 0, 0.2);
         }
 //		((ServerWorld) this.target.getWorld()).spawnParticles(ParticleTypes.ELECTRIC_SPARK, this.mob.getX(), this.mob.getY(), this.mob.getZ(), 5, 0.1, 0.0, 0.1, 0.2);
 	}
