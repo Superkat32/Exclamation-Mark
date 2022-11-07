@@ -3,7 +3,7 @@ package net.superkat.exclamation_point.mixin;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.TrackTargetGoal;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.particle.ParticleTypes;
+import net.minecraft.entity.mob.VexEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import net.superkat.exclamation_point.ExclamationPoint;
@@ -35,9 +35,13 @@ public abstract class ExampleMixin {
 		ExclamationPoint.LOGGER.info(String.valueOf(this.mob.getType()));
 		ExclamationPoint.LOGGER.info(String.valueOf(this.mob));
 //		if(this.canStart()) {
-		ExclamationPoint.LOGGER.info("SHOULD CONTINUE HAS BEEN ACTIVATED!");
+		ExclamationPoint.LOGGER.info("Start has been activated!");
+		if(!(this.mob instanceof VexEntity)) {
+			this.doParticle(this.mob.world);
+		} else {
+			ExclamationPoint.LOGGER.info("Not proceeding with method. Entity is a vex");
+		}
 		//Calls the method "doParticle", which will help the game display the particle.
-		this.doParticle(this.mob.world);
 //		}
 	}
 
@@ -52,7 +56,10 @@ public abstract class ExampleMixin {
 			//double deltaX, double deltaY, double deltaZ - The random movement of the particle.
 			//Changing deltaX will make the particle sometimes random move in the X direction the amount of the number inputted. Same for Y and Z.
 			//double speed - The speed that the particle will travel at. I believe it can be affected by deltaX, deltaY, and deltaZ
-			((ServerWorld) world).spawnParticles(ParticleTypes.END_ROD, mob.getX(), mob.getBodyY(0.5), mob.getZ(), 1, 0.1, 0, 0.1, 0.2);
+			//FIXME - Shulkers are a little bit glitchly
+			//FIXME - Endermen particle is a little bit too low
+			//FIXME - Vex particles do not work whatsoever
+			((ServerWorld) world).spawnParticles(ExclamationPoint.MARK, mob.getX(), mob.getEyeY() + 1, mob.getZ(), 1, 0.0, 0, 0.0, 0.1);
 //            world.addParticle(ParticleTypes.ELECTRIC_SPARK, this.mob.getX(), this.mob.getY(), this.mob.getZ(), 0.1, 0, 0.2);
         }
 //		((ServerWorld) this.target.getWorld()).spawnParticles(ParticleTypes.ELECTRIC_SPARK, this.mob.getX(), this.mob.getY(), this.mob.getZ(), 5, 0.1, 0.0, 0.1, 0.2);
