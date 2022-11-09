@@ -1,5 +1,6 @@
 package net.superkat.exclamation_point.mixin;
 
+import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.TrackTargetGoal;
 import net.minecraft.entity.mob.MobEntity;
@@ -13,6 +14,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import static net.minecraft.client.MinecraftClient.getInstance;
 
 @Mixin(TrackTargetGoal.class)
 public abstract class ExampleMixin {
@@ -36,6 +39,7 @@ public abstract class ExampleMixin {
 		ExclamationPoint.LOGGER.info(String.valueOf(this.mob));
 //		if(this.canStart()) {
 		ExclamationPoint.LOGGER.info("Start has been activated!");
+		//Prevents the particle working on the Vex because it causes the particle to spam for some reason
 		if(!(this.mob instanceof VexEntity)) {
 			this.doParticle(this.mob.world);
 		} else {
@@ -60,6 +64,8 @@ public abstract class ExampleMixin {
 			//FIXME - Endermen particle is a little bit too low
 			//FIXME - Vex particles do not work whatsoever
 			((ServerWorld) world).spawnParticles(ExclamationPoint.MARK, mob.getX(), mob.getEyeY() + 1, mob.getZ(), 1, 0.0, 0, 0.0, 0.1);
+
+			getInstance().getSoundManager().play(PositionedSoundInstance.master(ExclamationPoint.MY_SOUND_EVENT, 1.0F, 0.7F));
 //            world.addParticle(ParticleTypes.ELECTRIC_SPARK, this.mob.getX(), this.mob.getY(), this.mob.getZ(), 0.1, 0, 0.2);
         }
 //		((ServerWorld) this.target.getWorld()).spawnParticles(ParticleTypes.ELECTRIC_SPARK, this.mob.getX(), this.mob.getY(), this.mob.getZ(), 5, 0.1, 0.0, 0.1, 0.2);
