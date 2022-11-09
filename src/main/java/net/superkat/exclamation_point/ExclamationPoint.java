@@ -13,13 +13,13 @@ public class ExclamationPoint implements ModInitializer {
 	public static final String MOD_ID = "exclamation_point";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-	public static final Identifier MY_SOUND_ID = new Identifier("exclamation_point:my_sound");
-	public static SoundEvent MY_SOUND_EVENT = new SoundEvent(MY_SOUND_ID);
+	public static final Identifier MARK_SOUND_ID = new Identifier("exclamation_point:mark_sound");
+	public static SoundEvent MARK_SOUND_EVENT = new SoundEvent(MARK_SOUND_ID);
 	public static final DefaultParticleType MARK = FabricParticleTypes.simple(true);
 
 	@Override
 	public void onInitialize() {
-		Registry.register(Registry.SOUND_EVENT, ExclamationPoint.MY_SOUND_ID, MY_SOUND_EVENT);
+		Registry.register(Registry.SOUND_EVENT, ExclamationPoint.MARK_SOUND_ID, MARK_SOUND_EVENT);
 		Registry.register(Registry.PARTICLE_TYPE, new Identifier(MOD_ID, "mark"), MARK);
 	}
 }

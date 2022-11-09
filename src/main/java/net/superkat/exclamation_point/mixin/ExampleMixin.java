@@ -65,7 +65,8 @@ public abstract class ExampleMixin {
 			//FIXME - Vex particles do not work whatsoever
 			((ServerWorld) world).spawnParticles(ExclamationPoint.MARK, mob.getX(), mob.getEyeY() + 1, mob.getZ(), 1, 0.0, 0, 0.0, 0.1);
 
-			getInstance().getSoundManager().play(PositionedSoundInstance.master(ExclamationPoint.MY_SOUND_EVENT, 1.0F, 0.7F));
+			//plays the sound
+			getInstance().getSoundManager().play(PositionedSoundInstance.master(ExclamationPoint.MARK_SOUND_EVENT, 1.0F, 0.7F));
 //            world.addParticle(ParticleTypes.ELECTRIC_SPARK, this.mob.getX(), this.mob.getY(), this.mob.getZ(), 0.1, 0, 0.2);
         }
 //		((ServerWorld) this.target.getWorld()).spawnParticles(ParticleTypes.ELECTRIC_SPARK, this.mob.getX(), this.mob.getY(), this.mob.getZ(), 5, 0.1, 0.0, 0.1, 0.2);

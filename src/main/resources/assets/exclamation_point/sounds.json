@@ -1,8 +1,8 @@
 {
-  "my_sound": {
-    "subtitle": "subtitles.exclamation_point.my_sound",
+  "mark_sound": {
+    "subtitle": "subtitles.exclamation_point.mark_sound",
     "sounds": [
-      "exclamation_point:my_sound"
+      "exclamation_point:mark_sound"
     ]
   }
 }
