@@ -8,6 +8,7 @@ import net.minecraft.entity.mob.VexEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import net.superkat.exclamation_point.ExclamationPoint;
+import net.superkat.exclamation_point.ExclamationPointConfig;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -32,13 +33,13 @@ public abstract class ExampleMixin {
 	@Inject(method = "start()V", at = @At("HEAD"))
 
 	public void start(CallbackInfo ci) {
+		ExclamationPoint.LOGGER.info("Start has been activated!");
 		//Logs the monster's info that I might need later
 		ExclamationPoint.LOGGER.info(String.valueOf(this.mob.speed));
 		ExclamationPoint.LOGGER.info(String.valueOf(this.mob.world));
 		ExclamationPoint.LOGGER.info(String.valueOf(this.mob.getType()));
 		ExclamationPoint.LOGGER.info(String.valueOf(this.mob));
 //		if(this.canStart()) {
-		ExclamationPoint.LOGGER.info("Start has been activated!");
 		//Prevents the particle working on the Vex because it causes the particle to spam for some reason
 		if(!(this.mob instanceof VexEntity)) {
 			this.doParticle(this.mob.world);
@@ -63,10 +64,14 @@ public abstract class ExampleMixin {
 			//FIXME - Shulkers are a little bit glitchly
 			//FIXME - Endermen particle is a little bit too low
 			//FIXME - Vex particles do not work whatsoever
-			((ServerWorld) world).spawnParticles(ExclamationPoint.MARK, mob.getX(), mob.getEyeY() + 1, mob.getZ(), 1, 0.0, 0, 0.0, 0.1);
-
-			//plays the sound
-			getInstance().getSoundManager().play(PositionedSoundInstance.master(ExclamationPoint.MARK_SOUND_EVENT, 1.0F, 0.7F));
+			if(ExclamationPointConfig.showMark) {
+				((ServerWorld) world).spawnParticles(ExclamationPoint.MARK, mob.getX(), mob.getEyeY() + 1, mob.getZ(), 1, 0.0, 0, 0.0, 0.1);
+			}
+			if(ExclamationPointConfig.playMarkSound) {
+				//plays the sound
+				float markVolumeF = ExclamationPointConfig.markSlider;
+				getInstance().getSoundManager().play(PositionedSoundInstance.master(ExclamationPoint.MARK_SOUND_EVENT, 1.0F, markVolumeF));
+			}
 //            world.addParticle(ParticleTypes.ELECTRIC_SPARK, this.mob.getX(), this.mob.getY(), this.mob.getZ(), 0.1, 0, 0.2);
         }
 //		((ServerWorld) this.target.getWorld()).spawnParticles(ParticleTypes.ELECTRIC_SPARK, this.mob.getX(), this.mob.getY(), this.mob.getZ(), 5, 0.1, 0.0, 0.1, 0.2);

@@ -1,0 +1,8 @@
+{
+  "subtitles.exclamation_point.mark_sound": "Exclamation Sound",
+
+  "exclamation_point.midnightconfig.title": "Exclamation Point Config",
+  "exclamation_point.midnightconfig.showMark": "Show Exclamation Point?",
+  "exclamation_point.midnightconfig.playMarkSound": "Play Exclamation Point Sound?",
+  "exclamation_point.midnightconfig.markSlider": "Exclamation Point Volume"
+}
