@@ -35,15 +35,19 @@ public abstract class ExampleMixin {
 	public void start(CallbackInfo ci) {
 		ExclamationPoint.LOGGER.info("Start has been activated!");
 		//Logs the monster's info that I might need later
-		ExclamationPoint.LOGGER.info(String.valueOf(this.mob.speed));
-		ExclamationPoint.LOGGER.info(String.valueOf(this.mob.world));
-		ExclamationPoint.LOGGER.info(String.valueOf(this.mob.getType()));
-		ExclamationPoint.LOGGER.info(String.valueOf(this.mob));
+		ExclamationPoint.LOGGER.info("Mob = " + String.valueOf(this.mob.getType()));
+		ExclamationPoint.LOGGER.info("Mob's speed = " + String.valueOf(this.mob.speed));
+		ExclamationPoint.LOGGER.info("Mob's target = " + String.valueOf(this.mob.distanceTo(target)));
+		ExclamationPoint.LOGGER.info("Mob's world = " + String.valueOf(this.mob.world));
+		ExclamationPoint.LOGGER.info("Extra info = " + String.valueOf(this.mob));
 //		if(this.canStart()) {
 		//Prevents the particle working on the Vex because it causes the particle to spam for some reason
 		if(!(this.mob instanceof VexEntity)) {
 			this.doParticle(this.mob.world);
 		} else {
+//			if(mob.distanceTo(target) > 16) {
+//				ExclamationPoint.LOGGER.info("is greater than 16");
+//			}
 			ExclamationPoint.LOGGER.info("Not proceeding with method. Entity is a vex");
 		}
 		//Calls the method "doParticle", which will help the game display the particle.
