@@ -21,6 +21,7 @@ public class ExclamationPoint implements ModInitializer {
 
 	//Particle registry stuff
 	public static final DefaultParticleType MARK = FabricParticleTypes.simple(true);
+	public static final DefaultParticleType QMARK = FabricParticleTypes.simple(true);
 
 	@Override
 	public void onInitialize() {
@@ -31,5 +32,6 @@ public class ExclamationPoint implements ModInitializer {
 		Registry.register(Registry.SOUND_EVENT, ExclamationPoint.MARK_SOUND_ID, MARK_SOUND_EVENT);
 		//Registers particles
 		Registry.register(Registry.PARTICLE_TYPE, new Identifier(MOD_ID, "mark"), MARK);
+		Registry.register(Registry.PARTICLE_TYPE, new Identifier(MOD_ID, "qmark"), QMARK);
 	}
 }

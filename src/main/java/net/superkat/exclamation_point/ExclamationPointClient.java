@@ -20,6 +20,12 @@ public class ExclamationPointClient implements ClientModInitializer {
         //Registers the particle effect
         ParticleFactoryRegistry.getInstance().register(ExclamationPoint.MARK, Factory::new);
 
+        ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register((atlasTexture, registry) -> {
+            registry.register(new Identifier(MOD_ID, "particle/mark"));
+        });
+
+        ParticleFactoryRegistry.getInstance().register(ExclamationPoint.QMARK, QuestionMarkParticle.Factory::new);
+
     }
     public static Identifier id(String path) {
         return new Identifier(MOD_ID, path);
