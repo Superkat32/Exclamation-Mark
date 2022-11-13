@@ -2,7 +2,10 @@
   "subtitles.exclamation_point.mark_sound": "Exclamation Sound",
 
   "exclamation_point.midnightconfig.title": "Exclamation Point Config",
-  "exclamation_point.midnightconfig.showMark": "Show Exclamation Point?",
-  "exclamation_point.midnightconfig.playMarkSound": "Play Exclamation Point Sound?",
-  "exclamation_point.midnightconfig.markSlider": "Exclamation Point Volume"
+  "exclamation_point.midnightconfig.showExclamationMark": "Show Exclamation Point?",
+  "exclamation_point.midnightconfig.playExclamationMarkSound": "Play Exclamation Point Sound?",
+  "exclamation_point.midnightconfig.exclamationMarkSlider": "Exclamation Point Volume",
+  "exclamation_point.midnightconfig.showQuestionMark": "Show Question Mark?",
+  "exclamation_point.midnightconfig.playQuestionMarkSound": "Play Question Mark Sound?",
+  "exclamation_point.midnightconfig.questionMarkSlider": "Question Mark Volume"
 }

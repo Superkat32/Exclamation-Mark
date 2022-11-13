@@ -46,12 +46,11 @@ public abstract class ExampleMixin {
 			//if targetAcquired is true, then show exclamation mark, if false, show question mark
 			this.doParticle(this.mob.world, true);
 			this.playSound(true);
+		} else if(this.mob instanceof VexEntity) {
+			ExclamationPoint.LOGGER.info("Not proceeding with start method - Entity is a vex");
 		} else {
-//			if(mob.distanceTo(target) > 16) {
-//				ExclamationPoint.LOGGER.info("is greater than 16");
-//			}
-			ExclamationPoint.LOGGER.info("Not proceeding with method. Entity is a vex");
-		}
+            ExclamationPoint.LOGGER.info("Not proceeding with start method - None of the if/else statements were met");
+        }
 //		}
 	}
 
@@ -59,6 +58,16 @@ public abstract class ExampleMixin {
 
 	public void stop(CallbackInfo ci) {
 		ExclamationPoint.LOGGER.info("Stop has been activated!");
+        if(!(this.mob instanceof VexEntity)) {
+            //targetAcquired boolean basically means if the particle/sound should play the exclamation mark or the question mark
+            //if targetAcquired is true, then show exclamation mark, if false, show question mark
+            this.doParticle(this.mob.world, false);
+            this.playSound(false);
+        } else if(this.mob instanceof VexEntity) {
+            ExclamationPoint.LOGGER.info("Not proceeding with stop method - Entity is a vex");
+        } else {
+            ExclamationPoint.LOGGER.info("Not proceeding with stop method - None of the if/else statements were met");
+        }
 	}
 
 	private void doParticle(World world, boolean targetAcquired) {
@@ -76,27 +85,36 @@ public abstract class ExampleMixin {
 				//FIXME - Shulkers are a little bit glitchly
 				//FIXME - Endermen particle is a little bit too low
 				//FIXME - Vex particles do not work whatsoever
-				if(ExclamationPointConfig.showMark) {
+				if(ExclamationPointConfig.showExclamationMark) {
 					((ServerWorld) world).spawnParticles(ExclamationPoint.MARK, mob.getX(), mob.getEyeY() + 1, mob.getZ(), 1, 0.0, 0, 0.0, 0.1);
 				}
-				if(ExclamationPointConfig.playMarkSound) {
-					//grabs the float from the config, then uses it as the volume
-					float markVolumeF = ExclamationPointConfig.markSlider;
-					getInstance().getSoundManager().play(PositionedSoundInstance.master(ExclamationPoint.MARK_SOUND_EVENT, 1.0F, markVolumeF));
-				}
-			}
+			} else if(!targetAcquired) {
+                if(ExclamationPointConfig.showQuestionMark) {
+                    ((ServerWorld) world).spawnParticles(ExclamationPoint.QMARK, mob.getX(), mob.getEyeY() + 1, mob.getZ(), 1, 0.0, 0, 0.0, 0.1);
+                }
+            } else {
+                ExclamationPoint.LOGGER.info("Not proceeding with doParticle - targetAcquired wasn't true or false");
+            }
         }
 	}
 
 	public void playSound(boolean targetAcquired) {
 		//plays the sound
 		if (targetAcquired) {
-			if(ExclamationPointConfig.playMarkSound) {
+			if(ExclamationPointConfig.playExclamationMarkSound) {
 				//grabs the float from the config, then uses it as the volume
-				float markVolumeF = ExclamationPointConfig.markSlider;
+				float markVolumeF = ExclamationPointConfig.exclamationMarkVolume;
 				getInstance().getSoundManager().play(PositionedSoundInstance.master(ExclamationPoint.MARK_SOUND_EVENT, 1.0F, markVolumeF));
 			}
-		}
+		} else if(!targetAcquired) {
+            if(ExclamationPointConfig.playQuestionMarkSound) {
+                //grabs the float from the config, then uses it as the volume
+                float markVolumeF = ExclamationPointConfig.questionMarkSlider;
+                getInstance().getSoundManager().play(PositionedSoundInstance.master(ExclamationPoint.MARK_SOUND_EVENT, 1.0F, markVolumeF));
+            }
+        } else {
+            ExclamationPoint.LOGGER.info("Not proceeding with doParticle - targetAcquired wasn't true or false");
+        }
 	}
 
 }
