@@ -4,5 +4,11 @@
     "sounds": [
       "exclamation_point:mark_sound"
     ]
+  },
+  "qmark_sound": {
+    "subtitle": "subtitles.exclamation_point.qmark_sound",
+    "sounds": [
+      "exclamation_point:qmark_sound"
+    ]
   }
 }

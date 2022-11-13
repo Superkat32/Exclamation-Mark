@@ -18,6 +18,8 @@ public class ExclamationPoint implements ModInitializer {
 
 	public static final Identifier MARK_SOUND_ID = new Identifier("exclamation_point:mark_sound");
 	public static SoundEvent MARK_SOUND_EVENT = new SoundEvent(MARK_SOUND_ID);
+	public static final Identifier QUESTION_MARK_SOUND_ID = new Identifier("exclamation_point:qmark_sound");
+	public static SoundEvent QUESTION_MARK_SOUND_EVENT = new SoundEvent(QUESTION_MARK_SOUND_ID);
 
 	//Particle registry stuff
 	public static final DefaultParticleType MARK = FabricParticleTypes.simple(true);
@@ -30,6 +32,7 @@ public class ExclamationPoint implements ModInitializer {
 
 		//Registers sounds
 		Registry.register(Registry.SOUND_EVENT, ExclamationPoint.MARK_SOUND_ID, MARK_SOUND_EVENT);
+		Registry.register(Registry.SOUND_EVENT, ExclamationPoint.QUESTION_MARK_SOUND_ID, QUESTION_MARK_SOUND_EVENT);
 		//Registers particles
 		Registry.register(Registry.PARTICLE_TYPE, new Identifier(MOD_ID, "mark"), MARK);
 		Registry.register(Registry.PARTICLE_TYPE, new Identifier(MOD_ID, "qmark"), QMARK);

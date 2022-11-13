@@ -110,7 +110,7 @@ public abstract class ExampleMixin {
             if(ExclamationPointConfig.playQuestionMarkSound) {
                 //grabs the float from the config, then uses it as the volume
                 float markVolumeF = ExclamationPointConfig.questionMarkSlider;
-                getInstance().getSoundManager().play(PositionedSoundInstance.master(ExclamationPoint.MARK_SOUND_EVENT, 1.0F, markVolumeF));
+                getInstance().getSoundManager().play(PositionedSoundInstance.master(ExclamationPoint.QUESTION_MARK_SOUND_EVENT, 1.0F, markVolumeF));
             }
         } else {
             ExclamationPoint.LOGGER.info("Not proceeding with doParticle - targetAcquired wasn't true or false");

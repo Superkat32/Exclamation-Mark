@@ -1,5 +1,6 @@
 {
-  "subtitles.exclamation_point.mark_sound": "Exclamation Sound",
+  "subtitles.exclamation_point.mark_sound": "Exclamation Point Sound",
+  "subtitles.exclamation_point.qmark_sound": "Question Mark Sound",
 
   "exclamation_point.midnightconfig.title": "Exclamation Point Config",
   "exclamation_point.midnightconfig.showExclamationMark": "Show Exclamation Point?",
