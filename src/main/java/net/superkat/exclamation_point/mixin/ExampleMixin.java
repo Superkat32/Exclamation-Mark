@@ -43,41 +43,50 @@ public abstract class ExampleMixin {
 //		if(this.canStart()) {
 		//Prevents the particle working on the Vex because it causes the particle to spam for some reason
 		if(!(this.mob instanceof VexEntity)) {
-			this.doParticle(this.mob.world);
+			//targetAcquired boolean basically means if the particle/sound should play the exclamation mark or the question mark
+			//if targetAcquired is true, then show exclamation mark, if false, show question mark
+			this.doParticle(this.mob.world, true);
+			this.playSound(true);
 		} else {
 //			if(mob.distanceTo(target) > 16) {
 //				ExclamationPoint.LOGGER.info("is greater than 16");
 //			}
 			ExclamationPoint.LOGGER.info("Not proceeding with method. Entity is a vex");
 		}
-		//Calls the method "doParticle", which will help the game display the particle.
 //		}
 	}
 
-	private void doParticle(World world) {
+	private void doParticle(World world, boolean targetAcquired) {
 		ExclamationPoint.LOGGER.info("doParticle has been activated!");
         if (world instanceof ServerWorld) {
-			ExclamationPoint.LOGGER.info("Particle has been activated!");
-//			((ServerWorld) world).spawnParticles(ParticleEffect particle, double x, double y, double z, int count, double deltaX, double deltaY, double deltaZ, double speed)
-			//ParticleEffect - The type of particle you wish to display
-			//double x, double y, double z - The position that the particle will be displayed
-			//int count - The amount of particles you want to display
-			//double deltaX, double deltaY, double deltaZ - The random movement of the particle.
-			//Changing deltaX will make the particle sometimes random move in the X direction the amount of the number inputted. Same for Y and Z.
-			//double speed - The speed that the particle will travel at. I believe it can be affected by deltaX, deltaY, and deltaZ
-			//FIXME - Shulkers are a little bit glitchly
-			//FIXME - Endermen particle is a little bit too low
-			//FIXME - Vex particles do not work whatsoever
-			if(ExclamationPointConfig.showMark) {
-				((ServerWorld) world).spawnParticles(ExclamationPoint.MARK, mob.getX(), mob.getEyeY() + 1, mob.getZ(), 1, 0.0, 0, 0.0, 0.1);
+			if(targetAcquired) {
+				ExclamationPoint.LOGGER.info("Particle has been activated! (Target Acquired)");
+	//			((ServerWorld) world).spawnParticles(ParticleEffect particle, double x, double y, double z, int count, double deltaX, double deltaY, double deltaZ, double speed)
+				//ParticleEffect - The type of particle you wish to display
+				//double x, double y, double z - The position that the particle will be displayed
+				//int count - The amount of particles you want to display
+				//double deltaX, double deltaY, double deltaZ - The random movement of the particle
+				//Changing deltaX will make the particle sometimes random move in the X direction the amount of the number inputted. Same for Y and Z
+				//double speed - The speed that the particle will travel at. I believe it can be affected by deltaX, deltaY, and deltaZ
+				//FIXME - Shulkers are a little bit glitchly
+				//FIXME - Endermen particle is a little bit too low
+				//FIXME - Vex particles do not work whatsoever
+				if(ExclamationPointConfig.showMark) {
+					((ServerWorld) world).spawnParticles(ExclamationPoint.MARK, mob.getX(), mob.getEyeY() + 1, mob.getZ(), 1, 0.0, 0, 0.0, 0.1);
+				}
 			}
+        }
+	}
+
+	public void playSound(boolean targetAcquired) {
+		if (targetAcquired) {
+			//plays the sound
 			if(ExclamationPointConfig.playMarkSound) {
-				//plays the sound
+				//grabs the float from the config, then uses it as the volume
 				float markVolumeF = ExclamationPointConfig.markSlider;
 				getInstance().getSoundManager().play(PositionedSoundInstance.master(ExclamationPoint.MARK_SOUND_EVENT, 1.0F, markVolumeF));
 			}
-//            world.addParticle(ParticleTypes.ELECTRIC_SPARK, this.mob.getX(), this.mob.getY(), this.mob.getZ(), 0.1, 0, 0.2);
-        }
-//		((ServerWorld) this.target.getWorld()).spawnParticles(ParticleTypes.ELECTRIC_SPARK, this.mob.getX(), this.mob.getY(), this.mob.getZ(), 5, 0.1, 0.0, 0.1, 0.2);
+		}
 	}
+
 }
