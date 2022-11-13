@@ -35,11 +35,10 @@ public abstract class ExampleMixin {
 	public void start(CallbackInfo ci) {
 		ExclamationPoint.LOGGER.info("Start has been activated!");
 		//Logs the monster's info that I might need later
+		ExclamationPoint.LOGGER.info("Quick overview = " + String.valueOf(this.mob));
 		ExclamationPoint.LOGGER.info("Mob = " + String.valueOf(this.mob.getType()));
 		ExclamationPoint.LOGGER.info("Mob's speed = " + String.valueOf(this.mob.speed));
-		ExclamationPoint.LOGGER.info("Mob's target = " + String.valueOf(this.mob.distanceTo(target)));
 		ExclamationPoint.LOGGER.info("Mob's world = " + String.valueOf(this.mob.world));
-		ExclamationPoint.LOGGER.info("Extra info = " + String.valueOf(this.mob));
 //		if(this.canStart()) {
 		//Prevents the particle working on the Vex because it causes the particle to spam for some reason
 		if(!(this.mob instanceof VexEntity)) {
@@ -54,6 +53,12 @@ public abstract class ExampleMixin {
 			ExclamationPoint.LOGGER.info("Not proceeding with method. Entity is a vex");
 		}
 //		}
+	}
+
+	@Inject(method = "stop()V", at = @At("HEAD"))
+
+	public void stop(CallbackInfo ci) {
+		ExclamationPoint.LOGGER.info("Stop has been activated!");
 	}
 
 	private void doParticle(World world, boolean targetAcquired) {
@@ -74,13 +79,18 @@ public abstract class ExampleMixin {
 				if(ExclamationPointConfig.showMark) {
 					((ServerWorld) world).spawnParticles(ExclamationPoint.MARK, mob.getX(), mob.getEyeY() + 1, mob.getZ(), 1, 0.0, 0, 0.0, 0.1);
 				}
+				if(ExclamationPointConfig.playMarkSound) {
+					//grabs the float from the config, then uses it as the volume
+					float markVolumeF = ExclamationPointConfig.markSlider;
+					getInstance().getSoundManager().play(PositionedSoundInstance.master(ExclamationPoint.MARK_SOUND_EVENT, 1.0F, markVolumeF));
+				}
 			}
         }
 	}
 
 	public void playSound(boolean targetAcquired) {
+		//plays the sound
 		if (targetAcquired) {
-			//plays the sound
 			if(ExclamationPointConfig.playMarkSound) {
 				//grabs the float from the config, then uses it as the volume
 				float markVolumeF = ExclamationPointConfig.markSlider;
