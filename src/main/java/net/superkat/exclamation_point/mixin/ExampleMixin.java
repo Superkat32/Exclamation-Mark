@@ -23,6 +23,8 @@ public abstract class ExampleMixin {
 
 //	@Shadow public abstract boolean shouldContinue();
 
+	public boolean hasTarget = false;
+
 	@Shadow @Final
 	protected MobEntity mob;
 
@@ -46,6 +48,7 @@ public abstract class ExampleMixin {
 			//if targetAcquired is true, then show exclamation mark, if false, show question mark
 			this.doParticle(this.mob.world, true);
 			this.playSound(true);
+			hasTarget = true;
 		} else if(this.mob instanceof VexEntity) {
 			ExclamationPoint.LOGGER.info("Not proceeding with start method - Entity is a vex");
 		} else {
@@ -63,6 +66,7 @@ public abstract class ExampleMixin {
             //if targetAcquired is true, then show exclamation mark, if false, show question mark
             this.doParticle(this.mob.world, false);
             this.playSound(false);
+			hasTarget = false;
         } else if(this.mob instanceof VexEntity) {
             ExclamationPoint.LOGGER.info("Not proceeding with stop method - Entity is a vex");
         } else {
@@ -86,11 +90,15 @@ public abstract class ExampleMixin {
 				//FIXME - Endermen particle is a little bit too low
 				//FIXME - Vex particles do not work whatsoever
 				if(ExclamationPointConfig.showExclamationMark) {
-					((ServerWorld) world).spawnParticles(ExclamationPoint.MARK, mob.getX(), mob.getEyeY() + 1, mob.getZ(), 1, 0.0, 0, 0.0, 0.1);
+					if(hasTarget) {
+						((ServerWorld) world).spawnParticles(ExclamationPoint.MARK, mob.getX(), mob.getEyeY() + 1, mob.getZ(), 1, 0.0, 0, 0.0, 0.1);
+					}
 				}
 			} else if(!targetAcquired) {
                 if(ExclamationPointConfig.showQuestionMark) {
-                    ((ServerWorld) world).spawnParticles(ExclamationPoint.QMARK, mob.getX(), mob.getEyeY() + 1, mob.getZ(), 1, 0.0, 0, 0.0, 0.1);
+					if (!hasTarget) {
+						((ServerWorld) world).spawnParticles(ExclamationPoint.QMARK, mob.getX(), mob.getEyeY() + 1, mob.getZ(), 1, 0.0, 0, 0.0, 0.1);
+					}
                 }
             } else {
                 ExclamationPoint.LOGGER.info("Not proceeding with doParticle - targetAcquired wasn't true or false");
