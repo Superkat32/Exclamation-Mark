@@ -3,8 +3,10 @@ package net.superkat.exclamation_point.mixin;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.TrackTargetGoal;
+import net.minecraft.entity.mob.DrownedEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.VexEntity;
+import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import net.superkat.exclamation_point.ExclamationPoint;
@@ -22,8 +24,6 @@ import static net.minecraft.client.MinecraftClient.getInstance;
 public abstract class ExampleMixin {
 
 //	@Shadow public abstract boolean shouldContinue();
-
-	public boolean hasTarget = false;
 
 	@Shadow @Final
 	protected MobEntity mob;
@@ -43,17 +43,18 @@ public abstract class ExampleMixin {
 		ExclamationPoint.LOGGER.info("Mob's world = " + String.valueOf(this.mob.world));
 //		if(this.canStart()) {
 		//Prevents the particle working on the Vex because it causes the particle to spam for some reason
-		if(!(this.mob instanceof VexEntity)) {
+		if(!(this.mob instanceof VexEntity && this.mob instanceof ZombieEntity && this.mob instanceof DrownedEntity)) {
 			//targetAcquired boolean basically means if the particle/sound should play the exclamation mark or the question mark
 			//if targetAcquired is true, then show exclamation mark, if false, show question mark
 			this.doParticle(this.mob.world, true);
 			this.playSound(true);
-			hasTarget = true;
 		} else if(this.mob instanceof VexEntity) {
 			ExclamationPoint.LOGGER.info("Not proceeding with start method - Entity is a vex");
-		} else {
-            ExclamationPoint.LOGGER.info("Not proceeding with start method - None of the if/else statements were met");
-        }
+		} else if(this.mob instanceof ZombieEntity || this.mob instanceof DrownedEntity) {
+			ExclamationPoint.LOGGER.info("Not proceeding with TrackTargetGoal start method - Priority is ZombieAttackGoal");
+        } else {
+			ExclamationPoint.LOGGER.info("Not proceeding with start method - None of the if/else statements were met");
+		}
 //		}
 	}
 
@@ -61,15 +62,16 @@ public abstract class ExampleMixin {
 
 	public void stop(CallbackInfo ci) {
 		ExclamationPoint.LOGGER.info("Stop has been activated!");
-        if(!(this.mob instanceof VexEntity)) {
+        if(!(this.mob instanceof VexEntity && this.mob instanceof ZombieEntity && this.mob instanceof DrownedEntity)) {
             //targetAcquired boolean basically means if the particle/sound should play the exclamation mark or the question mark
             //if targetAcquired is true, then show exclamation mark, if false, show question mark
             this.doParticle(this.mob.world, false);
             this.playSound(false);
-			hasTarget = false;
         } else if(this.mob instanceof VexEntity) {
             ExclamationPoint.LOGGER.info("Not proceeding with stop method - Entity is a vex");
-        } else {
+        } else if(this.mob instanceof ZombieEntity || this.mob instanceof DrownedEntity) {
+			ExclamationPoint.LOGGER.info("Not proceeding with TrackTargetGoal start method - Priority is ZombieAttackGoal");
+		} else {
             ExclamationPoint.LOGGER.info("Not proceeding with stop method - None of the if/else statements were met");
         }
 	}
@@ -90,15 +92,11 @@ public abstract class ExampleMixin {
 				//FIXME - Endermen particle is a little bit too low
 				//FIXME - Vex particles do not work whatsoever
 				if(ExclamationPointConfig.showExclamationMark) {
-					if(hasTarget) {
-						((ServerWorld) world).spawnParticles(ExclamationPoint.MARK, mob.getX(), mob.getEyeY() + 1, mob.getZ(), 1, 0.0, 0, 0.0, 0.1);
-					}
+					((ServerWorld) world).spawnParticles(ExclamationPoint.MARK, mob.getX(), mob.getEyeY() + 1, mob.getZ(), 1, 0.0, 0, 0.0, 0.1);
 				}
 			} else if(!targetAcquired) {
                 if(ExclamationPointConfig.showQuestionMark) {
-					if (!hasTarget) {
-						((ServerWorld) world).spawnParticles(ExclamationPoint.QMARK, mob.getX(), mob.getEyeY() + 1, mob.getZ(), 1, 0.0, 0, 0.0, 0.1);
-					}
+					((ServerWorld) world).spawnParticles(ExclamationPoint.QMARK, mob.getX(), mob.getEyeY() + 1, mob.getZ(), 1, 0.0, 0, 0.0, 0.1);
                 }
             } else {
                 ExclamationPoint.LOGGER.info("Not proceeding with doParticle - targetAcquired wasn't true or false");
