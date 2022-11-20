@@ -3,10 +3,18 @@
   "subtitles.exclamation_point.qmark_sound": "Question Mark Sound",
 
   "exclamation_point.midnightconfig.title": "Exclamation Point Config",
+  "exclamation_point.midnightconfig.modEnabled": "Mod Enabled?",
+  "exclamation_point.midnightconfig.modEnabled.tooltip": "Should the mod be enabled?",
   "exclamation_point.midnightconfig.showExclamationMark": "Show Exclamation Point?",
+  "exclamation_point.midnightconfig.showExclamationMark.tooltip": "Should the exclamation point particle be shown?",
   "exclamation_point.midnightconfig.playExclamationMarkSound": "Play Exclamation Point Sound?",
+  "exclamation_point.midnightconfig.playExclamationMarkSound.tooltip": "Should the exclamation point sound be played?",
   "exclamation_point.midnightconfig.exclamationMarkSlider": "Exclamation Point Volume",
+  "exclamation_point.midnightconfig.exclamationMarkSlider.tooltip": "The volume of the exclamation point sound",
   "exclamation_point.midnightconfig.showQuestionMark": "Show Question Mark?",
+  "exclamation_point.midnightconfig.showQuestionMark.tooltip": "Should the question mark particle be shown?",
   "exclamation_point.midnightconfig.playQuestionMarkSound": "Play Question Mark Sound?",
-  "exclamation_point.midnightconfig.questionMarkSlider": "Question Mark Volume"
+  "exclamation_point.midnightconfig.playQuestionMarkSound.tooltip": "Should the question mark sound be played?",
+  "exclamation_point.midnightconfig.questionMarkSlider": "Question Mark Volume",
+  "exclamation_point.midnightconfig.questionMarkSlider.tooltip": "The volume of the question mark sound"
 }
