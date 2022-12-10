@@ -2,10 +2,7 @@ package net.superkat.exclamation_point.mixin;
 
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.entity.ai.goal.TrackTargetGoal;
-import net.minecraft.entity.mob.DrownedEntity;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.VexEntity;
-import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import net.superkat.exclamation_point.ExclamationPoint;
@@ -13,9 +10,6 @@ import net.superkat.exclamation_point.ExclamationPointConfig;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static net.minecraft.client.MinecraftClient.getInstance;
 
@@ -27,10 +21,58 @@ public abstract class ExampleMixin {
 	@Shadow @Final
 	protected MobEntity mob;
 
-//	public abstract boolean canStart();
+	//New-ish method(still didn't work)
 
-//	@Shadow
-//	protected LivingEntity target;
+/*
+	public boolean isHasTarget() {
+		return hasTarget;
+	}
+
+	public void setHasTarget(boolean hasTarget) {
+		this.hasTarget = hasTarget;
+	}
+
+	public boolean hasTarget = false;
+	public int timer = 0;
+	public int stopTime;
+	public int startTime;
+
+	@Inject(method = "stop", at = @At("TAIL"))
+	public void stop(CallbackInfo ci) {
+		ExclamationPoint.LOGGER.info("stop() has been activated!");
+		stopTime = timer;
+		ExclamationPoint.LOGGER.info(String.valueOf(stopTime));
+		setHasTarget(false);
+//		ExclamationPoint.LOGGER.info("(ExampleMixin; stop) " + String.valueOf(hasTarget));
+	}
+
+//	@Inject(method = "start", at = @At("TAIL"))
+//	public void start(CallbackInfo ci) {
+//			startTime = timer;
+//	}
+
+	public void tick() {
+		timer++;
+		if (stopTime + 5 == timer) {
+			ExclamationPoint.LOGGER.info(String.valueOf(stopTime));
+			ExclamationPoint.LOGGER.info("stop() passed check 1");
+			if (!(stopTime == startTime)) {
+				ExclamationPoint.LOGGER.info("stop() passed check 2");
+				ExclamationPoint.LOGGER.info("Question mark should be shown");
+			}
+		}
+	}
+
+*/
+
+	//Old method(includes old start and old stop)
+
+/*
+
+	public abstract boolean canStart();
+
+	@Shadow
+	protected LivingEntity target;
 	@Inject(method = "start()V", at = @At("HEAD"))
 
 	public void start(CallbackInfo ci) {
@@ -79,7 +121,10 @@ public abstract class ExampleMixin {
 		}
 	}
 
-	private void doParticle(World world, boolean targetAcquired) {
+ */
+
+//
+	public void doParticle(World world, boolean targetAcquired) {
 		ExclamationPoint.LOGGER.info("doParticle has been activated!");
         if (world instanceof ServerWorld) {
 			if(targetAcquired) {
@@ -126,5 +171,4 @@ public abstract class ExampleMixin {
             ExclamationPoint.LOGGER.info("Not proceeding with doParticle - targetAcquired wasn't true or false");
         }
 	}
-
 }
