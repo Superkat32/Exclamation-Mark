@@ -17,9 +17,9 @@ public class MarkParticle extends SpriteBillboardParticle {
         this.velocityX *= 0.009999999776482582;
         this.velocityY *= 0.009999999776482582;
         this.velocityZ *= 0.009999999776482582;
-        this.velocityX += 0.1;
+//        this.velocityX += 0.1;
         this.velocityY += 0.1;
-        this.velocityZ += 0.1;
+//        this.velocityZ += 0.1;
         this.scale = 1.0F;
         this.maxAge = 16;
         this.spriteProvider = spriteProvider;

@@ -142,11 +142,11 @@ public abstract class ExampleMixin {
 					ExclamationPoint.LOGGER.info("Particle has been activated! (Target Acquired)");
 					((ServerWorld) world).spawnParticles(ExclamationPoint.MARK, mob.getX(), mob.getEyeY() + 1, mob.getZ(), 1, 0.0, 0, 0.0, 0.1);
 				}
-			} else if(!targetAcquired) {
-                if(ExclamationPointConfig.showQuestionMark) {
-					ExclamationPoint.LOGGER.info("Particle has been activated! (!Target Acquired)");
-					((ServerWorld) world).spawnParticles(ExclamationPoint.QMARK, mob.getX(), mob.getEyeY() + 1, mob.getZ(), 1, 0.0, 0, 0.0, 0.1);
-                }
+//			} else if(!targetAcquired) {
+//                if(ExclamationPointConfig.showQuestionMark) {
+//					ExclamationPoint.LOGGER.info("Particle has been activated! (!Target Acquired)");
+//					((ServerWorld) world).spawnParticles(ExclamationPoint.QMARK, mob.getX(), mob.getEyeY() + 1, mob.getZ(), 1, 0.0, 0, 0.0, 0.1);
+//                }
             } else {
                 ExclamationPoint.LOGGER.info("Not proceeding with doParticle - targetAcquired wasn't true or false");
             }
@@ -161,12 +161,12 @@ public abstract class ExampleMixin {
 				float markVolumeF = ExclamationPointConfig.exclamationMarkVolume;
 				getInstance().getSoundManager().play(PositionedSoundInstance.master(ExclamationPoint.MARK_SOUND_EVENT, 1.0F, markVolumeF));
 			}
-		} else if(!targetAcquired) {
-            if(ExclamationPointConfig.playQuestionMarkSound) {
-                //grabs the float from the config, then uses it as the volume
-                float markVolumeF = ExclamationPointConfig.questionMarkSlider;
-                getInstance().getSoundManager().play(PositionedSoundInstance.master(ExclamationPoint.QUESTION_MARK_SOUND_EVENT, 1.0F, markVolumeF));
-            }
+//		} else if(!targetAcquired) {
+//            if(ExclamationPointConfig.playQuestionMarkSound) {
+//                //grabs the float from the config, then uses it as the volume
+//                float markVolumeF = ExclamationPointConfig.questionMarkSlider;
+//                getInstance().getSoundManager().play(PositionedSoundInstance.master(ExclamationPoint.QUESTION_MARK_SOUND_EVENT, 1.0F, markVolumeF));
+//            }
         } else {
             ExclamationPoint.LOGGER.info("Not proceeding with doParticle - targetAcquired wasn't true or false");
         }
