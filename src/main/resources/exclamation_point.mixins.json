@@ -7,7 +7,7 @@
   ],
   "client": [
     "ActiveTargetGoalMixin",
-    "ExampleMixin"
+    "TrackTargetGoalMixin"
   ],
   "injectors": {
     "defaultRequire": 1

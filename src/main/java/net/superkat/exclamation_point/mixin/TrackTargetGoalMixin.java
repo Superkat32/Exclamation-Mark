@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import static net.minecraft.client.MinecraftClient.getInstance;
 
 @Mixin(TrackTargetGoal.class)
-public abstract class ExampleMixin {
+public abstract class TrackTargetGoalMixin {
 
 //	@Shadow public abstract boolean shouldContinue();
 
@@ -43,7 +43,7 @@ public abstract class ExampleMixin {
 		stopTime = timer;
 		ExclamationPoint.LOGGER.info(String.valueOf(stopTime));
 		setHasTarget(false);
-//		ExclamationPoint.LOGGER.info("(ExampleMixin; stop) " + String.valueOf(hasTarget));
+//		ExclamationPoint.LOGGER.info("(TrackTargetGoalMixin; stop) " + String.valueOf(hasTarget));
 	}
 
 //	@Inject(method = "start", at = @At("TAIL"))
@@ -135,9 +135,8 @@ public abstract class ExampleMixin {
 				//double deltaX, double deltaY, double deltaZ - The random movement of the particle
 				//Changing deltaX will make the particle sometimes random move in the X direction the amount of the number inputted. Same for Y and Z
 				//double speed - The speed that the particle will travel at. I believe it can be affected by deltaX, deltaY, and deltaZ
-				//FIXME - Shulkers are a little bit glitchly
-				//FIXME - Endermen particle is a little bit too low
-				//FIXME - Vex particles do not work whatsoever
+				//FIXME - Wither seems buggy
+				//FIXME - Evoker is a bit odd
 				if(ExclamationPointConfig.showExclamationMark) {
 					ExclamationPoint.LOGGER.info("Particle has been activated! (Target Acquired)");
 					((ServerWorld) world).spawnParticles(ExclamationPoint.MARK, mob.getX(), mob.getEyeY() + 1, mob.getZ(), 1, 0.0, 0, 0.0, 0.1);

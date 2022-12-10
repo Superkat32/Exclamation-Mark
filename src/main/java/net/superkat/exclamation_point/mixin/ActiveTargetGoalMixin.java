@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ActiveTargetGoal.class)
-public abstract class ActiveTargetGoalMixin extends ExampleMixin {
+public abstract class ActiveTargetGoalMixin extends TrackTargetGoalMixin {
 
     @Inject(method = "start", at = @At("TAIL"))
     public void start(CallbackInfo ci) {
